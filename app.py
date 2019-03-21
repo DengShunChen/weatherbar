@@ -48,13 +48,21 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
 
+    if event.message.text == "氣溫":
+      message = ImageSendMessage(
+        original_content_url='https://www.cwb.gov.tw/Data/temperature/temp.jpg',
+        preview_image_url='https://www.cwb.gov.tw/Data/temperature/temp.jpg'
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+
     carousel_template_message = TemplateSendMessage(
         alt_text='目錄 contains',
         template=CarouselTemplate(
             columns=[
                 CarouselColumn(
                     thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
-                    title='天氣資訊',
+                    title='現在天氣',
                     text='請選擇',
                     actions=[
                         MessageAction(
