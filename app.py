@@ -77,6 +77,10 @@ def handle_message(event):
                         URIAction(
                             label='氣象局官網',
                             uri='https:www.cwb.gov.tw'
+                        ),
+                        URIAction(
+                            label='平鎮區空氣品質',
+                            uri='http://aqicn.org/city/taiwan/pingzhen/hk/'
                         )
                     ]
                 )
