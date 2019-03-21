@@ -1,4 +1,5 @@
 from flask import Flask, request, abort
+import configparser
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -8,12 +9,17 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 
+
 app = Flask(__name__)
 
+config = configparser.ConfigParser()
+config.read("config.ini")
+
 # Channel Access Token
-line_bot_api = LineBotApi('PRuq5Zy5iNyJRDGO52QjIuOIl0f3dhFRPYB8ZIqSSaPB+Ky4mN9eGw2XrOx0JoAje+4+1oFOClEqpdlFfA4cyRrtY3I0YeJtRGhKntmOhmalAf+c21nTPFeB1FEzHlIgp6OOFyVGI0wjzU4wkd6CdQdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi(config['line_bot']['Channel_Access_Token'])
 # Channel Secret
-handler = WebhookHandler('2dbf89b8625f4f8c28cf9cc3995065ac')
+handler = WebhookHandler(config['line_bot']['Channel_Secret'])
+
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
