@@ -92,6 +92,10 @@ def handle_message(event):
                         URIAction(
                             label='中壢區空氣品質',
                             uri='http://aqicn.org/city/taiwan/jhongli/hk/'
+                        ),
+                        URIAction(
+                            label='台灣空氣品質',
+                            uri='https://airtw.epa.gov.tw/'
                         )
                     ]
                 )
