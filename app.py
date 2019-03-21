@@ -40,11 +40,42 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     #message = TextSendMessage(text=event.message.text)
-    message = ImageSendMessage(
-    original_content_url='https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png',
-    preview_image_url='https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png'
-    )
-    line_bot_api.reply_message(event.reply_token, message)
+    if event.message.text == "雷達":
+      message = ImageSendMessage(
+        original_content_url='https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png',
+        preview_image_url='https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png'
+      )
+      line_bot_api.reply_message(event.reply_token, message)
+      return 0
+
+carousel_template_message = TemplateSendMessage(
+        alt_text='目錄 contains',
+        template=CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
+                    title='天氣資訊',
+                    text='請選擇',
+                    actions=[
+                        MessageAction(
+                            label='雷達',
+                            text='雷達'
+                        ),
+                        URIAction(
+                            label='氣溫',
+                            text='氣溫'
+                        ),
+                        URIAction(
+                            label='氣象局官網',
+                            uri='https:www.cwb.gov.tw'
+                        )
+                    ]
+                )
+            ]
+      )
+)
+
+line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
 import os
 if __name__ == "__main__":
