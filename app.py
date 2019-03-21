@@ -61,7 +61,7 @@ def handle_message(event):
                             label='雷達',
                             text='雷達'
                         ),
-                        URIAction(
+                        MessageAction(
                             label='氣溫',
                             text='氣溫'
                         ),
