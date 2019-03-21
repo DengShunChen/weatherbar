@@ -77,10 +77,20 @@ def handle_message(event):
                         URIAction(
                             label='氣象局官網',
                             uri='https:www.cwb.gov.tw'
-                        ),
+                        )
+                ),
+                CarouselColumn(
+                    thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
+                    title='現在天氣',
+                    text='請選擇',
+                    actions=[
                         URIAction(
                             label='平鎮區空氣品質',
                             uri='http://aqicn.org/city/taiwan/pingzhen/hk/'
+                        ),
+                        URIAction(
+                            label='中壢區空氣品質',
+                            uri='http://aqicn.org/city/taiwan/jhongli/hk/'
                         )
                     ]
                 )
