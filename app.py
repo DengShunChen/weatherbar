@@ -36,7 +36,7 @@ def handle_message(event):
     #message = TextSendMessage(text=event.message.text)
     message = ImageSendMessage(
     original_content_url='https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png',
-    preview_image_url='https://www.cwb.gov.tw/Data/temperature/temp.jpg'
+    preview_image_url='https://www.cwb.gov.tw/Data/radar/CV1_TW_1000.png'
     )
     line_bot_api.reply_message(event.reply_token, message)
 
