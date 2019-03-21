@@ -78,6 +78,7 @@ def handle_message(event):
                             label='氣象局官網',
                             uri='https:www.cwb.gov.tw'
                         )
+                    ]
                 ),
                 CarouselColumn(
                     thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
