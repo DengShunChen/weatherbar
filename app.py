@@ -1,4 +1,5 @@
 from flask import Flask, request, abort
+import random
 import configparser
 
 from linebot import (
