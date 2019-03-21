@@ -48,7 +48,7 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
 
-carousel_template_message = TemplateSendMessage(
+    carousel_template_message = TemplateSendMessage(
         alt_text='目錄 contains',
         template=CarouselTemplate(
             columns=[
@@ -72,10 +72,10 @@ carousel_template_message = TemplateSendMessage(
                     ]
                 )
             ]
-      )
-)
+        )
+    )
 
-line_bot_api.reply_message(event.reply_token, carousel_template_message)
+    line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
 import os
 if __name__ == "__main__":
