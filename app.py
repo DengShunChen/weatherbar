@@ -82,7 +82,7 @@ def handle_message(event):
                 ),
                 CarouselColumn(
                     thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
-                    title='現在天氣',
+                    title='空氣品質',
                     text='請選擇',
                     actions=[
                         URIAction(
