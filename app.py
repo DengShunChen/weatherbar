@@ -57,7 +57,7 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
 
-    if event.message.text == "一週天氣":
+    if event.message.text == "天氣":
       dataid="F-D0047-007"
       dataformat='JSON'
       data = cwb_open_data(dataid,dataformat)
