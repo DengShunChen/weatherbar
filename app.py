@@ -68,7 +68,7 @@ def handle_message(event):
                     actions=[
                         MessageAction(
                             label='雷達',
-                            text='雷達/n 哈哈'
+                            text='雷達\n 哈哈'
                         ),
                         MessageAction(
                             label='氣溫',
