@@ -70,7 +70,7 @@ class cwb_open_data:
       
       string = string + time + '\n' 
       string = string + ifcst["elementValue"]['value'] + '\n\n'
-    print(string)
+    return string
 
 if __name__ == '__main__':
   # get data
@@ -83,7 +83,8 @@ if __name__ == '__main__':
   location='平鎮區'
 
   data.get_info(location)
-  data.write_info(data.WeatherDescription)
+  string = data.write_info(data.WeatherDescription)
+#  print(string)
   #print(data.WeatherDescription)
 # for ivar in data.info:
 #   print(ivar["description"],ivar["elementName"])
