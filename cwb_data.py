@@ -57,19 +57,18 @@ class cwb_open_data:
     string = ''
     for ifcst in var:
       date = ifcst["startTime"].split('T')[0]
-      tmp = ifcst["startTime"].split('T')[1]
-      time = tmp.split('+')[0]
+      time = ifcst["startTime"].split('T')[1].split('+')[0]
 
-      #print(int(date[0:4]),int(date[5:7]),int(date[8:10]),int(time[0:2]),int(time[3:5]))
       dt = datetime(int(date[0:4]),int(date[5:7]),int(date[8:10]),int(time[0:2]),int(time[3:5]))
       dt = dt + timedelta(hours=8)
-
-     # print(dt.strftime("%Y-%m-%d %X %a"))
       time = dt.strftime("%Y-%m-%d %p%H:%M %a")
       time = time.replace(time[11:13],datetime_dict[time[11:13]]).replace(time[19:22],datetime_dict[time[19:22]])
       
       string = string + time + '\n' 
-      string = string + ifcst["elementValue"]['value'] + '\n\n'
+
+      weather = ifcst["elementValue"]['value'].split('。')
+      weather = weather[0]+'，'+weather[1]+'\n'+weather[2]+'，'+weather[3]+'\n'+weather[4]+'，'+weather[5]  
+      string = string + weather  + '\n\n'
     return string
 
 if __name__ == '__main__':
@@ -84,7 +83,7 @@ if __name__ == '__main__':
 
   data.get_info(location)
   string = data.write_info(data.WeatherDescription)
-#  print(string)
+  print(string)
   #print(data.WeatherDescription)
 # for ivar in data.info:
 #   print(ivar["description"],ivar["elementName"])
