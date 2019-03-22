@@ -60,19 +60,16 @@ def handle_message(event):
     if event.message.text == "平鎮天氣":
       dataid="F-D0047-007"
       dataformat='JSON'
+      # get cwb open data
       data = cwb_open_data(dataid,dataformat)
-
       # read json file
       data.read_json()
-
       # get weather information
       location='平鎮區'
       data.get_info(location)
-
       content = data.write_info(data.WeatherDescription)
-      line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=content))
+
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
     carousel_template_message = TemplateSendMessage(
