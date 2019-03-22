@@ -9,7 +9,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+from cwb_data import *
 
 app = Flask(__name__)
 
@@ -57,6 +57,24 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token, message)
       return 0
 
+    if event.message.text == "一週天氣":
+      dataid="F-D0047-007"
+      dataformat='JSON'
+      data = cwb_open_data(dataid,dataformat)
+
+      # read json file
+      data.read_json()
+
+      # get weather information
+      location='平鎮區'
+      data.get_info(location)
+
+      content = data.write_info(data.WeatherDescription)
+      line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=content))
+      return 0
+
     carousel_template_message = TemplateSendMessage(
         alt_text='目錄 contains',
         template=CarouselTemplate(
@@ -68,7 +86,7 @@ def handle_message(event):
                     actions=[
                         MessageAction(
                             label='雷達',
-                            text='雷達\n 哈哈'
+                            text='雷達'
                         ),
                         MessageAction(
                             label='氣溫',

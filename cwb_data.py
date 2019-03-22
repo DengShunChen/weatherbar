@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import urllib.request as ur
 import json
+from datetime import datetime, timedelta
+
 
 class cwb_open_data:
   # CWB Open Data 
@@ -49,6 +51,26 @@ class cwb_open_data:
         self.UVI = ivar["time"]
       if ivar["description"] == "天氣預報綜合描述":
         self.WeatherDescription = ivar["time"]
+  def write_info(self,var):
+    datetime_dict={'AM':'上午','PM':'下午', \
+    'Mon':'星期一','Tue':'星期二','Wed':'星期三','Thu':'星期四','Fri':'星期五','Sat':'星期六','Sun':'星期日'}
+    string = ''
+    for ifcst in var:
+      date = ifcst["startTime"].split('T')[0]
+      tmp = ifcst["startTime"].split('T')[1]
+      time = tmp.split('+')[0]
+
+      #print(int(date[0:4]),int(date[5:7]),int(date[8:10]),int(time[0:2]),int(time[3:5]))
+      dt = datetime(int(date[0:4]),int(date[5:7]),int(date[8:10]),int(time[0:2]),int(time[3:5]))
+      dt = dt + timedelta(hours=8)
+
+     # print(dt.strftime("%Y-%m-%d %X %a"))
+      time = dt.strftime("%Y-%m-%d %p%H:%M %a")
+      time = time.replace(time[11:13],datetime_dict[time[11:13]]).replace(time[19:22],datetime_dict[time[19:22]])
+      
+      string = string + time + '\n' 
+      string = string + ifcst["elementValue"]['value'] + '\n\n'
+    print(string)
 
 if __name__ == '__main__':
   # get data
@@ -61,8 +83,8 @@ if __name__ == '__main__':
   location='平鎮區'
 
   data.get_info(location)
-
-  print(data.WeatherDescription)
+  data.write_info(data.WeatherDescription)
+  #print(data.WeatherDescription)
 # for ivar in data.info:
 #   print(ivar["description"],ivar["elementName"])
 
