@@ -37,7 +37,7 @@ def callback():
         abort(400)
     return 'OK'
 
-# 處理訊息
+# 處理文字訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     #message = TextSendMessage(text=event.message.text)
@@ -68,7 +68,7 @@ def handle_message(event):
                     actions=[
                         MessageAction(
                             label='雷達',
-                            text='雷達'
+                            text='雷達/n 哈哈'
                         ),
                         MessageAction(
                             label='氣溫',
@@ -105,7 +105,7 @@ def handle_message(event):
 
     line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
-# 處理圖片
+# 處理貼圖（隨機選擇貼圖回應）
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_sticker_message(event):
     print("package_id:", event.message.package_id)
