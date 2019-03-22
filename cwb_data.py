@@ -67,7 +67,7 @@ class cwb_open_data:
       string = string + time + '\n' 
 
       weather = ifcst["elementValue"]['value'].split('。')
-      weather = weather[0]+'，'+weather[1]+'\n'+weather[2]+'，'+weather[3]+'\n'+weather[4]+'，'+weather[5]  
+      weather = weather[0]+'，'+weather[1]+'。\n'+weather[2]+'，'+weather[3]+'。\n'+weather[4]+'，'+weather[5]+'。'  
       string = string + weather  + '\n\n'
     return string
 
