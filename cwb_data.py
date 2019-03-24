@@ -24,6 +24,9 @@ class cwb_open_data:
   def read_json(self):
     urldata = ur.urlopen(self.url)
     self.data = json.loads(urldata.read())
+  
+  def read_text(self):
+    self.data = ur.urlopen(self.url)
 
   def get_info(self,location):
     self.city = self.data["cwbopendata"]["dataset"]["locations"]["locationsName"]
@@ -66,8 +69,7 @@ class cwb_open_data:
       
       string = string + time + '\n' 
 
-      weather = ifcst["elementValue"]['value'].split('。')
-      weather = weather[0]+'，'+weather[1]+'。\n'+weather[2]+'，'+weather[3]+'。\n'+weather[4]+'，'+weather[5]+'。'  
+      weather = ifcst["elementValue"]['value']
       string = string + weather  + '\n\n'
     return string
 
@@ -75,15 +77,29 @@ if __name__ == '__main__':
   # get data
   dataid="F-D0047-007"
   dataformat='JSON'
-  data = cwb_open_data(dataid,dataformat)
-  
-  # read json file
+  data = cwb_open_data(dataid,dataformat)  
   data.read_json()
   location='平鎮區'
+
+  # get data
+  dataid="F-D0047-091"
+  dataformat='JSON'
+  data = cwb_open_data(dataid,dataformat)  
+  data.read_json()
+  location='桃園市'
+
+
 
   data.get_info(location)
   string = data.write_info(data.WeatherDescription)
   print(string)
+
+  # get data
+  url = 'https://opendata.cwb.gov.tw/fileapi/opendata/MFC/F-C0032-031.FW50'
+  resource = ur.urlopen(url)
+  content = resource.read().decode('big5')
+  print(content)
+
   #print(data.WeatherDescription)
 # for ivar in data.info:
 #   print(ivar["description"],ivar["elementName"])

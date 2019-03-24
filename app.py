@@ -72,6 +72,16 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
+    if event.message.text == "天氣小幫手":
+      # get data
+      url = 'https://opendata.cwb.gov.tw/fileapi/opendata/MFC/F-C0032-031.FW50'
+      resource = ur.urlopen(url)
+      content = resource.read().decode('big5')
+
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
+      return 0
+
+
     carousel_template_message = TemplateSendMessage(
         alt_text='目錄 contains',
         template=CarouselTemplate(
