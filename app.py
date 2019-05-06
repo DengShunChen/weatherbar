@@ -10,6 +10,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 from cwb_data import *
+from google_search import *
 
 app = Flask(__name__)
 
@@ -81,54 +82,57 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
       return 0
 
+    if event.message.text == "選項":
+      carousel_template_message = TemplateSendMessage(
+          alt_text='目錄 contains',
+          template=CarouselTemplate(
+              columns=[
+                  CarouselColumn(
+                      thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
+                      title='現在天氣',
+                      text='請選擇',
+                      actions=[
+                          MessageAction(
+                              label='雷達',
+                              text='雷達'
+                          ),
+                          MessageAction(
+                              label='氣溫',
+                              text='氣溫'
+                          ),
+                          URIAction(
+                              label='氣象局官網',
+                              uri='https:www.cwb.gov.tw'
+                          )
+                      ]
+                  ),
+                  CarouselColumn(
+                      thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
+                      title='空氣品質',
+                      text='請選擇',
+                      actions=[
+                          URIAction(
+                              label='平鎮區空氣品質',
+                              uri='http://aqicn.org/city/taiwan/pingzhen/hk/'
+                          ),
+                          URIAction(
+                              label='中壢區空氣品質',
+                              uri='http://aqicn.org/city/taiwan/jhongli/hk/'
+                          ),
+                          URIAction(
+                              label='台灣空氣品質',
+                              uri='https://airtw.epa.gov.tw/'
+                          )
+                      ]
+                  )
+              ]
+          )
+      )
 
-    carousel_template_message = TemplateSendMessage(
-        alt_text='目錄 contains',
-        template=CarouselTemplate(
-            columns=[
-                CarouselColumn(
-                    thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
-                    title='現在天氣',
-                    text='請選擇',
-                    actions=[
-                        MessageAction(
-                            label='雷達',
-                            text='雷達'
-                        ),
-                        MessageAction(
-                            label='氣溫',
-                            text='氣溫'
-                        ),
-                        URIAction(
-                            label='氣象局官網',
-                            uri='https:www.cwb.gov.tw'
-                        )
-                    ]
-                ),
-                CarouselColumn(
-                    thumbnail_image_url='https://wi-images.condecdn.net/image/doEYpG6Xd87/crop/810/f/weather.jpg',
-                    title='空氣品質',
-                    text='請選擇',
-                    actions=[
-                        URIAction(
-                            label='平鎮區空氣品質',
-                            uri='http://aqicn.org/city/taiwan/pingzhen/hk/'
-                        ),
-                        URIAction(
-                            label='中壢區空氣品質',
-                            uri='http://aqicn.org/city/taiwan/jhongli/hk/'
-                        ),
-                        URIAction(
-                            label='台灣空氣品質',
-                            uri='https://airtw.epa.gov.tw/'
-                        )
-                    ]
-                )
-            ]
-        )
-    )
+      line_bot_api.reply_message(event.reply_token, carousel_template_message)
 
-    line_bot_api.reply_message(event.reply_token, carousel_template_message)
+    content = search(event.message.text)
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=content))
 
 # 處理貼圖（隨機選擇貼圖回應）
 @handler.add(MessageEvent, message=StickerMessage)

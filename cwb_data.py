@@ -73,32 +73,37 @@ class cwb_open_data:
       string = string + weather  + '\n\n'
     return string
 
+  def helper(self):
+    # get data
+    url = 'https://opendata.cwb.gov.tw/fileapi/opendata/MFC/F-C0032-031.FW50'
+    resource = ur.urlopen(url)
+    content = resource.read().decode('big5')
+    print(content)
+    return content
+ 
+  def oneweek(self,location):
+    self.get_info(location)
+    content = self.write_info(data.WeatherDescription)
+    print(content)
+    return content
+
 if __name__ == '__main__':
-  # get data
+  # taoyuan city 
   dataid="F-D0047-007"
   dataformat='JSON'
   data = cwb_open_data(dataid,dataformat)  
   data.read_json()
   location='平鎮區'
 
-  # get data
-  dataid="F-D0047-091"
-  dataformat='JSON'
-  data = cwb_open_data(dataid,dataformat)  
-  data.read_json()
-  location='桃園市'
+  # city/county
+ #dataid="F-D0047-091"
+ #dataformat='JSON'
+ #data = cwb_open_data(dataid,dataformat)  
+ #data.read_json()
+ #location='桃園市'
 
-
-
-  data.get_info(location)
-  string = data.write_info(data.WeatherDescription)
-  print(string)
-
-  # get data
-  url = 'https://opendata.cwb.gov.tw/fileapi/opendata/MFC/F-C0032-031.FW50'
-  resource = ur.urlopen(url)
-  content = resource.read().decode('big5')
-  print(content)
+  data.oneweek(location)
+  data.helper()
 
   #print(data.WeatherDescription)
 # for ivar in data.info:
