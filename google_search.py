@@ -7,7 +7,7 @@ def search(query):
   #query = "郭文貴"
 
   string=''
-  for j in gs(query, 5 ): 
+  for j in gs(query, stop=5 ): 
     print(j) 
     string = string + j + '\n'
 
