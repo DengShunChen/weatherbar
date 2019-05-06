@@ -1,6 +1,5 @@
 #!/usr/bin/env python 
 from googlesearch import search as gs 
-import requests
 import urllib.request as ur
 from bs4 import BeautifulSoup
 
