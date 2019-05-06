@@ -1,10 +1,7 @@
 #!/usr/bin/env python 
+from googlesearch import gsearch 
 
 def search(query):
-  try: 
-	  from googlesearch import gsearch 
-  except ImportError: 
-	  print("No module named 'google' found") 
 
   # to search 
   #query = "郭文貴"
