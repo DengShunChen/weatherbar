@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 def search(query):
 
+  print('query:',query)
 
   def google_scrape(url):
     thepage = ur.urlopen(url)
@@ -13,6 +14,7 @@ def search(query):
 
   i = 1
   strings = ''
+  query = str(query)
   for url in gs(query, stop=5):
     a = google_scrape(url)
     strings = strings + str(i) + ". " + a + '\n'
