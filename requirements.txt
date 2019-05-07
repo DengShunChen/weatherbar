@@ -3,3 +3,6 @@ gunicorn==19.9.0
 beautifulsoup4==4.7.1
 line-bot-sdk==1.8.0
 google
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

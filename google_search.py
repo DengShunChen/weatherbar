@@ -15,9 +15,9 @@ def search(query):
   i = 1
   strings = ''
   query = str(query)
-  for url in gs(query, stop=5):
-    a = google_scrape(url)
-    strings = strings + str(i) + ". " + a + '\n'
+  for url in gs(query, stop=5, tpe='nws'):
+#   a = google_scrape(url)
+#   strings = strings + str(i) + ". " + a + '\n'
     strings = strings + url + '\n'
     strings = strings + '\n' 
     i += 1
@@ -26,7 +26,7 @@ def search(query):
 
 if __name__ == '__main__':
   # to search 
-  query = "郭文貴"
+  query = "基督教"
 
   content = search(query) 
   print(content)
