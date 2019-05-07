@@ -5,12 +5,13 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+date='2019/05/04'
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
 # The ID and range of a sample spreadsheet.
 SAMPLE_SPREADSHEET_ID = '1L-HZDaf9ZPKkXmDkdcOAOofCzCUfOydgssGiDgFuBuA'
-SAMPLE_RANGE_NAME = '2019/05/04感恩代禱事項!A:B'
+SAMPLE_RANGE_NAME = date+'感恩代禱事項!A:B'
 
 def readprayer():
     """Shows basic usage of the Sheets API.
@@ -50,13 +51,18 @@ def readprayer():
         for r,row in enumerate(values):
             # Print columns A and E, which correspond to indices 0 and 4.
             try:
-              print('%d. %s: %s' % (r,row[0], row[1]))
-              strings = strings + '%d. %s: %s' % (r,row[0], row[1]) + '\n'
+              if r == 0:
+              #  print('    %-4.4s: %s %s' % (row[0], row[1]),date)
+                strings = strings + '    %-4.4s: %s %s' % (row[0], date, row[1]) + '\n'
+              else:
+             #   print('%2.2d. %-4.4s: %s' % (r,row[0], row[1]))
+                strings = strings + '%2.2d. %-4.4s: %s' % (r,row[0], row[1]) + '\n'
             except: 
-              print('%d. %s: %s' % (r,row[0], '<尚未填寫>'))
-              strings = strings + '%d. %s: %s' % (r,row[0], '尚未填寫') + '\n'
+            #  print('%2.2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>'))
+              strings = strings + '%2.2d. %-4.4s: %s' % (r,row[0], '<<尚未填寫>>') + '\n'
 
     return strings
 
 if __name__ == '__main__':
-    readprayer()
+    strings = readprayer()
+    print(strings)
